@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Packed Assets
+  m_Name: MenuScenes
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: MenuScenes
   m_Data:
     m_SerializedData: []
-  m_GUID: 4981b838bbec74a029539a211ee49dc0
+  m_GUID: 997c0d93296c5487aa2ec7b708efa085
   m_SerializeEntries:
-  - m_GUID: b841f365713174db4b4f104771bcd41e
-    m_Address: Assets/Scenes/PersistentManagers.unity
+  - m_GUID: 7db41dffcedb2473c834a474628ca476
+    m_Address: Assets/Scenes/LobbyScene.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d521949a3204a4f8daf82899253bc6ea, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 97bb0dba5080045f5866e49d404ea950, type: 2}
-    - {fileID: 11400000, guid: 13854351c21c5447c9d03fa32c899106, type: 2}
+    - {fileID: 11400000, guid: 82c009d2577b844afbc1f5b261ac1034, type: 2}
+    - {fileID: 11400000, guid: f9e5698c1e72742be80ee9b59ed6d296, type: 2}
