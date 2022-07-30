@@ -15,9 +15,25 @@ namespace HorrorGame
 
         protected Rigidbody2D rb;
 
+        private void OnEnable()
+        {
+            inputReader.moveEvent += OnMovement;
+        }
+
+        private void OnDisable()
+        {
+            inputReader.moveEvent -= OnMovement;
+        }
+        
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void OnMovement(Vector2 movement)
+        {
+            logger.Info($"moving {movement}");
+            rb.velocity = (movement * movementSpeed);
         }
     }
 }
