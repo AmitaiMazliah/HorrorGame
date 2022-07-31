@@ -15,12 +15,12 @@ namespace HorrorGame
 
         protected Rigidbody2D rb;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             inputReader.moveEvent += OnMovement;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             inputReader.moveEvent -= OnMovement;
         }

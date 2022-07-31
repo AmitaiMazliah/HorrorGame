@@ -169,6 +169,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Killer"",
+            ""id"": ""80494c84-fe47-4669-9fc5-9076263d96d9"",
+            ""actions"": [
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f53568c9-f4f8-4edb-a4f6-ee92d294f990"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1b4739e5-39bc-4845-83c9-2f00270584a8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -194,6 +222,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        // Killer
+        m_Killer = asset.FindActionMap("Killer", throwIfNotFound: true);
+        m_Killer_Attack = m_Killer.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,6 +321,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Killer
+    private readonly InputActionMap m_Killer;
+    private IKillerActions m_KillerActionsCallbackInterface;
+    private readonly InputAction m_Killer_Attack;
+    public struct KillerActions
+    {
+        private @PlayerControls m_Wrapper;
+        public KillerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Attack => m_Wrapper.m_Killer_Attack;
+        public InputActionMap Get() { return m_Wrapper.m_Killer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KillerActions set) { return set.Get(); }
+        public void SetCallbacks(IKillerActions instance)
+        {
+            if (m_Wrapper.m_KillerActionsCallbackInterface != null)
+            {
+                @Attack.started -= m_Wrapper.m_KillerActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_KillerActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_KillerActionsCallbackInterface.OnAttack;
+            }
+            m_Wrapper.m_KillerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+            }
+        }
+    }
+    public KillerActions @Killer => new KillerActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -303,5 +367,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+    }
+    public interface IKillerActions
+    {
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

@@ -5,11 +5,13 @@ using UnityEngine.Events;
 namespace Tempname.Input
 {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
-    public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
+    public class InputReader : ScriptableObject, PlayerControls.IPlayerActions, PlayerControls.IKillerActions
     {
-        public event UnityAction<Vector2> moveEvent = delegate { };
-        public event UnityAction<Vector2> lookEvent = delegate { };
-        
+        public event UnityAction<Vector2> moveEvent;
+        public event UnityAction<Vector2> lookEvent;
+
+        public event UnityAction attackEvent; 
+
         private PlayerControls gameInput;
 
         private void OnEnable()
@@ -18,6 +20,7 @@ namespace Tempname.Input
             {
                 gameInput = new PlayerControls();
                 gameInput.Player.SetCallbacks(this);
+                gameInput.Killer.SetCallbacks(this);
             }
 
             EnableGameplayInput();
@@ -27,17 +30,7 @@ namespace Tempname.Input
         {
             DisableAllInput();
         }
-
-        public void OnMovement(InputAction.CallbackContext context)
-        {
-            moveEvent.Invoke(context.ReadValue<Vector2>());
-        }
         
-        public void OnLook(InputAction.CallbackContext context)
-        {
-            lookEvent.Invoke(context.ReadValue<Vector2>());
-        }
-
         public void EnableGameplayInput()
         {
             gameInput.Player.Enable();
@@ -46,6 +39,26 @@ namespace Tempname.Input
         public void DisableAllInput()
         {
             gameInput.Player.Disable();
+        }
+
+        public void EnableKillerInput()
+        {
+            gameInput.Killer.Enable();
+        }
+
+        public void OnMovement(InputAction.CallbackContext context)
+        {
+            moveEvent?.Invoke(context.ReadValue<Vector2>());
+        }
+        
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            lookEvent?.Invoke(context.ReadValue<Vector2>());
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed) attackEvent?.Invoke();
         }
     }
 }
