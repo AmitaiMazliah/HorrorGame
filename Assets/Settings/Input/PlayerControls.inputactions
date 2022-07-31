@@ -175,6 +175,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Survivor",
+            "id": "120a17bd-0ea7-41ae-b796-3f6f4b25414f",
+            "actions": [
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "dba4f0a8-93de-437e-96aa-0c70631a1feb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "feca9324-78ec-438c-8fc6-9bbfb0b489bb",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

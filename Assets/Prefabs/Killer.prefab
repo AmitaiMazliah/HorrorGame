@@ -274,14 +274,13 @@ GameObject:
   - component: {fileID: 1127094928687390849}
   - component: {fileID: 1675249975266322789}
   - component: {fileID: 920979177043203081}
-  - component: {fileID: 5880927064828561467}
   m_Layer: 7
   m_Name: Killer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8815789241599202319
 Transform:
   m_ObjectHideFlags: 0
@@ -434,23 +433,6 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
   flashLightLength: 3
   flashLightAngle: 70
---- !u!114 &5880927064828561467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8815789241599202318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7da57c179b74d948232a2a0741ebfed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  maxHealth: 100
-  currentHealth: 0
-  state: 0
 --- !u!1 &8855681531538828857
 GameObject:
   m_ObjectHideFlags: 0

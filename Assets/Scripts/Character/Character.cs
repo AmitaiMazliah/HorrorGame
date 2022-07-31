@@ -25,7 +25,7 @@ namespace HorrorGame
             inputReader.moveEvent -= OnMovement;
         }
         
-        private void Awake()
+        protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
         }

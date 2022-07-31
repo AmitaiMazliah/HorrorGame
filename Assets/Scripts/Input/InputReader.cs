@@ -5,12 +5,12 @@ using UnityEngine.Events;
 namespace Tempname.Input
 {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
-    public class InputReader : ScriptableObject, PlayerControls.IPlayerActions, PlayerControls.IKillerActions
+    public class InputReader : ScriptableObject, PlayerControls.IPlayerActions, PlayerControls.IKillerActions, PlayerControls.ISurvivorActions
     {
         public event UnityAction<Vector2> moveEvent;
         public event UnityAction<Vector2> lookEvent;
-
         public event UnityAction attackEvent; 
+        public event UnityAction<bool> toggleSprintEvent; 
 
         private PlayerControls gameInput;
 
@@ -21,6 +21,7 @@ namespace Tempname.Input
                 gameInput = new PlayerControls();
                 gameInput.Player.SetCallbacks(this);
                 gameInput.Killer.SetCallbacks(this);
+                gameInput.Survivor.SetCallbacks(this);
             }
 
             EnableGameplayInput();
@@ -39,11 +40,18 @@ namespace Tempname.Input
         public void DisableAllInput()
         {
             gameInput.Player.Disable();
+            gameInput.Killer.Disable();
+            gameInput.Survivor.Disable();
         }
 
         public void EnableKillerInput()
         {
             gameInput.Killer.Enable();
+        }
+
+        public void EnableSurvivorInput()
+        {
+            gameInput.Survivor.Enable();
         }
 
         public void OnMovement(InputAction.CallbackContext context)
@@ -59,6 +67,19 @@ namespace Tempname.Input
         public void OnAttack(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed) attackEvent?.Invoke();
+        }
+
+        public void OnSprint(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    toggleSprintEvent?.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    toggleSprintEvent?.Invoke(false);
+                    break;
+            }
         }
     }
 }

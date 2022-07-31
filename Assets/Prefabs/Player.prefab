@@ -492,7 +492,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
-  movementSpeed: 5
+  movementSpeed: 3
+  runSpeedAddition: 1.5
 --- !u!114 &6726893155407535070
 MonoBehaviour:
   m_ObjectHideFlags: 0

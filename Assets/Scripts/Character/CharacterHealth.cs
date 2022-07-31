@@ -1,10 +1,9 @@
 ﻿using Mirror;
-using UnityEditor;
 using UnityEngine;
 
 namespace HorrorGame
 {
-    public class CharacterHealth : NetworkBehaviour
+    public class CharacterHealth : Interactable
     {
         private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         
@@ -41,6 +40,30 @@ namespace HorrorGame
                 _ => state
             };
             logger.Info($"Character {name} changed {previousState} -> {state}");
+        }
+
+        [Server]
+        protected override void InnerInteract()
+        {
+            Heal();
+        }
+
+        [Server]
+        private void Heal()
+        {
+            var previousState = state;
+            state = state switch
+            {
+                CharacterState.Injured => CharacterState.Healthy,
+                CharacterState.Dying => CharacterState.Injured,
+                _ => state
+            };
+            logger.Info($"Character {name} changed {previousState} -> {state}");
+        }
+
+        public override bool IsAvailable()
+        {
+            return base.IsAvailable() && (state == CharacterState.Injured || state == CharacterState.Dying);
         }
     }
 
