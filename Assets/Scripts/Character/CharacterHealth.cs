@@ -1,10 +1,13 @@
 ﻿using Mirror;
+using UnityEditor;
 using UnityEngine;
 
 namespace HorrorGame
 {
     public class CharacterHealth : NetworkBehaviour
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        
         [SerializeField] private float maxHealth = 100;
 
         [SyncVar] public float currentHealth;
@@ -15,6 +18,7 @@ namespace HorrorGame
             currentHealth = maxHealth;
         }
 
+        [ServerCallback]
         private void Update()
         {
             if (state == CharacterState.Dying)
@@ -25,6 +29,18 @@ namespace HorrorGame
                     state = CharacterState.Dead;
                 }
             }
+        }
+
+        public void Hurt()
+        {
+            var previousState = state;
+            state = state switch
+            {
+                CharacterState.Healthy => CharacterState.Injured,
+                CharacterState.Injured => CharacterState.Dying,
+                _ => state
+            };
+            logger.Info($"Character {name} changed {previousState} -> {state}");
         }
     }
 

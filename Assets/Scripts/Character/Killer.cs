@@ -45,6 +45,8 @@ namespace HorrorGame
                 if (survivor != null)
                 {
                     logger.Info($"I hit someone {survivor.name}");
+                    var health = survivor.GetComponent<CharacterHealth>();
+                    health.Hurt();
                 }
             }
         } 
