@@ -32,7 +32,6 @@ namespace HorrorGame
 
         private void OnMovement(Vector2 movement)
         {
-            logger.Info($"moving {movement}");
             rb.velocity = (movement * movementSpeed);
         }
     }

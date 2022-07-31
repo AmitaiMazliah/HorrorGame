@@ -8,6 +8,7 @@ namespace Tempname.Input
     public class InputReader : ScriptableObject, PlayerControls.IPlayerActions
     {
         public event UnityAction<Vector2> moveEvent = delegate { };
+        public event UnityAction<Vector2> lookEvent = delegate { };
         
         private PlayerControls gameInput;
 
@@ -30,6 +31,11 @@ namespace Tempname.Input
         public void OnMovement(InputAction.CallbackContext context)
         {
             moveEvent.Invoke(context.ReadValue<Vector2>());
+        }
+        
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            lookEvent.Invoke(context.ReadValue<Vector2>());
         }
 
         public void EnableGameplayInput()
