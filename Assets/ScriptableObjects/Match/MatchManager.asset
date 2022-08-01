@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04e493d0e3149245bc4d6979f603110, type: 3}
-  m_Name: SoundEmitterFactory
+  m_Script: {fileID: 11500000, guid: b0f3633081b2426ca53b3bb86bd4adcd, type: 3}
+  m_Name: MatchManager
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1223106912215190651, guid: 2f05be97d2993664e9e0f214c7b533fc, type: 3}

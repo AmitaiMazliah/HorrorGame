@@ -7,9 +7,10 @@ namespace HorrorGame
 {
     public abstract class Character : NetworkBehaviour
     {
-        protected static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        protected static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [SerializeField] protected InputReader inputReader;
+        [SerializeField] protected MatchManager matchManager;
 
         [SerializeField] protected float movementSpeed = 5f;
         [SerializeField] private float interactingRadius = 5f;
@@ -43,7 +44,7 @@ namespace HorrorGame
 
             if (interactable)
             {
-                logger.Info($"Found interactable {interactable.name}");
+                Logger.Info($"Found interactable {interactable.name}");
             }
         }
 

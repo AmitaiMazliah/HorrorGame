@@ -28,15 +28,12 @@ namespace HorrorGame
         private void Awake()
         {
             cam = GetComponentInChildren<Camera>();
-            // flashLight = GetComponentInChildren<Light2D>();
         }
 
         private void Start()
         {
-            Debug.Log($"starting flashlight flashLightLength={flashLightLength}  flashLightAngle={flashLightAngle}");
             flashLight.pointLightOuterRadius = flashLightLength;
             flashLight.pointLightOuterAngle = flashLightAngle;
-            Debug.Log($"starting flashlight pointLightOuterRadius={flashLight.pointLightOuterRadius}  pointLightOuterAngle={flashLight.pointLightOuterAngle}");
         }
 
         private void OnLook(Vector2 look)

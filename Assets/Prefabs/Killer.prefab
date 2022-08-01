@@ -413,6 +413,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
+  matchManager: {fileID: 11400000, guid: ab508a0cd2e896048bf2b39309028748, type: 2}
   movementSpeed: 5
   interactingRadius: 1.25
   attackRadius: 0.75

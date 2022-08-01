@@ -37,7 +37,7 @@ namespace HorrorGame
                 CharacterState.Injured => CharacterState.Dying,
                 _ => state
             };
-            logger.Info($"Character {name} changed {previousState} -> {state}");
+            Logger.Info($"Character {name} changed {previousState} -> {state}");
         }
 
         [Server]
@@ -56,7 +56,7 @@ namespace HorrorGame
                 CharacterState.Dying => CharacterState.Injured,
                 _ => state
             };
-            logger.Info($"Character {name} changed {previousState} -> {state}");
+            Logger.Info($"Character {name} changed {previousState} -> {state}");
         }
 
         public override bool IsAvailable(NetworkIdentity interactor)

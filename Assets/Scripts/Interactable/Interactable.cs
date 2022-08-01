@@ -5,7 +5,7 @@ namespace HorrorGame
 {
     public abstract class Interactable : NetworkBehaviour
     {
-        protected static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        protected static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [SerializeField] protected float interactionTime = 0f;
 
@@ -16,7 +16,7 @@ namespace HorrorGame
         {
             if (IsAvailable(sender?.identity))
             {
-                logger.Info($"Interacting with {name}");
+                Logger.Info($"Interacting with {name}");
                 available = false;
                 
                 InnerInteract();

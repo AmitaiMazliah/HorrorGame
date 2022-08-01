@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6266377729512091950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468423489822798060}
+  - component: {fileID: 2991938842337354073}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468423489822798060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266377729512091950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2991938842337354073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266377729512091950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8c03d53df69794788d13f310e2043c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPersistant: 0
+  factory: {fileID: 11400000, guid: 4e1e0c16b894d2a418c35c019e45618c, type: 2}
+  pool: {fileID: 11400000, guid: a808a3290449781469e58117ac38a009, type: 2}
+  initialSize: 10
+  SFXEventChannel: {fileID: 11400000, guid: 60f5d7cb13003dd4dbd44a449946ea35, type: 2}
+  musicEventChannel: {fileID: 11400000, guid: b06c9f8b95339d74d8c688190a5cb849, type: 2}
+  sfxVolumeEventChannel: {fileID: 11400000, guid: bf90a036bc719e04585b17367563539e,
+    type: 2}
+  musicVolumeEventChannel: {fileID: 11400000, guid: 92ae6b9b5bb3b634b95d7f08014d2d78,
+    type: 2}
+  masterVolumeEventChannel: {fileID: 11400000, guid: 121b3c232c4730f4f8c7690f30db48ff,
+    type: 2}
+  audioMixer: {fileID: 24100000, guid: de3c8eac85a18f940b108e0aaff825d3, type: 2}
+  masterVolume: 1
+  musicVolume: 1
+  sfxVolume: 1

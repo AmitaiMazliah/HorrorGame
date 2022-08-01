@@ -21,11 +21,12 @@ namespace HorrorGame
         private void Start()
         {
             inputReader.EnableSurvivorInput();
+            matchManager.RegisterSurvivor(this);
         }
 
         private void ToggleSprint(bool sprinting)
         {
-            logger.Info($"Toggle sprint {sprinting}");
+            Logger.Info($"Toggle sprint {sprinting}");
             if (sprinting) movementSpeed += runSpeedAddition;
             else movementSpeed -= runSpeedAddition;
         }

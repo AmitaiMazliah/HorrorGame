@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04e493d0e3149245bc4d6979f603110, type: 3}
-  m_Name: SoundEmitterFactory
+  m_Script: {fileID: 11500000, guid: b390f061ede44474861d9c9c7c52ba8a, type: 3}
+  m_Name: NewGameplayScene
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1223106912215190651, guid: 2f05be97d2993664e9e0f214c7b533fc, type: 3}
+  description: 
+  sceneReference:
+    m_AssetGUID: 91e57bb341412478484288df4c0599a0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  musicTrack: {fileID: 0}

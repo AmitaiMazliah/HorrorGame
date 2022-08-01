@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04e493d0e3149245bc4d6979f603110, type: 3}
-  m_Name: SoundEmitterFactory
+  m_Script: {fileID: 11500000, guid: 2b0ccbf1c1395cf4f9e43b934ef60efd, type: 3}
+  m_Name: LobbyScene
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1223106912215190651, guid: 2f05be97d2993664e9e0f214c7b533fc, type: 3}
+  description: 
+  sceneReference:
+    m_AssetGUID: 7db41dffcedb2473c834a474628ca476
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  music: {fileID: 0}

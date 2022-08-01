@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistentManagersScene: {fileID: 11400000, guid: cc9ccc2213def4641a3233b7d1461aa5, type: 2}
+  lobbyScene: {fileID: 11400000, guid: 012b03b0bd35dbc48be9405b26e2b376, type: 2}
+  loadSceneEvent: {fileID: 11400000, guid: 33cec85652903d245b99985f9cec9841, type: 2}
   showLoadScreen: 1
 --- !u!4 &2077782011
 Transform:

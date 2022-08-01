@@ -24,11 +24,12 @@ namespace HorrorGame
         private void Start()
         {
             inputReader.EnableKillerInput();
+            matchManager.RegisterKiller(this);
         }
 
         private void OnAttack()
         {
-            logger.Info("Attacking");
+            Logger.Info("Attacking");
             CmdAttack();
         }
 
@@ -39,7 +40,7 @@ namespace HorrorGame
 
             foreach (var survivor in hitSurvivors)
             {
-                logger.Info($"I hit someone {survivor.name}");
+                Logger.Info($"I hit someone {survivor.name}");
                 var health = survivor.GetComponent<CharacterHealth>();
                 health.Hurt();
             }
