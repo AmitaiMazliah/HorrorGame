@@ -65,7 +65,7 @@ namespace HorrorGame
         {
             var character = interactor.GetComponent<Character>();
             return base.IsAvailable(interactor) && character is Survivor &&
-                   (state == CharacterState.Injured || state == CharacterState.Dying);
+                   state is CharacterState.Injured or CharacterState.Dying;
         }
     }
 

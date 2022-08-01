@@ -26,7 +26,7 @@ namespace HorrorGame
 
         private void Awake()
         {
-            cam = Camera.main;
+            cam = GetComponentInChildren<Camera>();
             flashLight = GetComponentInChildren<Light2D>();
 
             flashLight.pointLightOuterRadius = flashLightLength;

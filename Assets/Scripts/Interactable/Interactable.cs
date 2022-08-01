@@ -14,7 +14,7 @@ namespace HorrorGame
         [Command(requiresAuthority = false)]
         public void CmdInteract(NetworkConnectionToClient sender = null)
         {
-            if (IsAvailable(sender.identity))
+            if (IsAvailable(sender?.identity))
             {
                 logger.Info($"Interacting with {name}");
                 available = false;
