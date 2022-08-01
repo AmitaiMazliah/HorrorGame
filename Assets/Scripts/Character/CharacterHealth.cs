@@ -61,9 +61,11 @@ namespace HorrorGame
             logger.Info($"Character {name} changed {previousState} -> {state}");
         }
 
-        public override bool IsAvailable()
+        public override bool IsAvailable(NetworkIdentity interactor)
         {
-            return base.IsAvailable() && (state == CharacterState.Injured || state == CharacterState.Dying);
+            var character = interactor.GetComponent<Character>();
+            return base.IsAvailable(interactor) && character is Survivor &&
+                   (state == CharacterState.Injured || state == CharacterState.Dying);
         }
     }
 

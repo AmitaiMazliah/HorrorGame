@@ -9,6 +9,7 @@ namespace Tempname.Input
     {
         public event UnityAction<Vector2> moveEvent;
         public event UnityAction<Vector2> lookEvent;
+        public event UnityAction interactEvent;
         public event UnityAction attackEvent; 
         public event UnityAction<bool> toggleSprintEvent; 
 
@@ -62,6 +63,11 @@ namespace Tempname.Input
         public void OnLook(InputAction.CallbackContext context)
         {
             lookEvent?.Invoke(context.ReadValue<Vector2>());
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed) interactEvent?.Invoke();
         }
 
         public void OnAttack(InputAction.CallbackContext context)

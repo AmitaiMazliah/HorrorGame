@@ -13,7 +13,7 @@ public class UnityDebugAppender : TargetWithLayout
 
     protected override void Write(LogEventInfo logEvent)
     {
-        string logMessage = Layout.Render(logEvent);
+        var logMessage = Layout.Render(logEvent);
 
         if (logEvent.Level == LogLevel.Trace || logEvent.Level == LogLevel.Debug) Debug.LogAssertion(logMessage);
         else if (logEvent.Level == LogLevel.Info) Debug.Log(logMessage);

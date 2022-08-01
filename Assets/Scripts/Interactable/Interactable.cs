@@ -12,9 +12,9 @@ namespace HorrorGame
         [SyncVar] private bool available = true;
         
         [Command(requiresAuthority = false)]
-        public void CmdInteract()
+        public void CmdInteract(NetworkConnectionToClient sender = null)
         {
-            if (available)
+            if (IsAvailable(sender.identity))
             {
                 logger.Info($"Interacting with {name}");
                 available = false;
@@ -23,7 +23,7 @@ namespace HorrorGame
             }
         }
 
-        public virtual bool IsAvailable()
+        public virtual bool IsAvailable(NetworkIdentity interactor)
         {
             return available;
         }
