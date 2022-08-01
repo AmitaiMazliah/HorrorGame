@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System;
+using Mirror;
 using Tempname.Events;
 using Tempname.SceneManagement;
 using UnityEngine;
@@ -9,7 +10,31 @@ namespace HorrorGame
     {
         [SerializeField] private LoadEventChannelSO changeSceneEvent;
         [SerializeField] private GameSceneSO sceneSo;
-        
+
+        [Header("Listen on")]
+        [SerializeField] private VoidEventChannelSO onSceneReady;
+
+        private bool waitingForSceneChange;
+
+        private void OnEnable()
+        {
+            onSceneReady.OnEventRaised += OnSceneReady;
+        }
+
+        private void OnDisable()
+        {
+            onSceneReady.OnEventRaised -= OnSceneReady;
+        }
+
+        private void OnSceneReady()
+        {
+            if (waitingForSceneChange)
+            {
+                waitingForSceneChange = false;
+                FinishLoadScene();
+            }
+        }
+
         public override void ServerChangeScene(string newSceneName)
         {
             if (newSceneName == RoomScene)
@@ -57,6 +82,7 @@ namespace HorrorGame
             NetworkServer.isLoadingScene = true;
 
             changeSceneEvent.RaiseEvent(sceneSo, true);
+            waitingForSceneChange = true;
             
             // ServerChangeScene can be called when stopping the server
             // when this happens the server is not active so does not need to tell clients about the change

@@ -325,6 +325,7 @@ MonoBehaviour:
   clientIndex: 0
   changeSceneEvent: {fileID: 11400000, guid: 33cec85652903d245b99985f9cec9841, type: 2}
   sceneSo: {fileID: 11400000, guid: 0ca481cbf30afc24ebd401b3953fef64, type: 2}
+  onSceneReady: {fileID: 11400000, guid: b729e40fc41dd8b4ea7aaf5c857f7186, type: 2}
 --- !u!114 &2060644761
 MonoBehaviour:
   m_ObjectHideFlags: 0

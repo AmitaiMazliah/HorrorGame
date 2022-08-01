@@ -12,7 +12,7 @@ namespace Tempname.SceneManagement
     /// </summary>
     public class InitializationLoader : MonoBehaviour
     {
-        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [SerializeField] private GameSceneSO persistentManagersScene;
         [SerializeField] private GameSceneSO lobbyScene;
@@ -24,13 +24,13 @@ namespace Tempname.SceneManagement
 
         private void Start()
         {
-            logger.Info("Starting to load persistent managers scene");
+            Logger.Info("Starting to load persistent managers scene");
             persistentManagersScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, showLoadScreen).Completed += LoadEventChannel;
         }
 
         private void LoadEventChannel(AsyncOperationHandle<SceneInstance> obj)
         {
-            logger.Info("Successfully loaded persistent managers scene removing init scene");
+            Logger.Info("Successfully loaded persistent managers scene removing init scene");
             loadSceneEvent.RaiseEvent(lobbyScene, true);
             SceneManager.UnloadSceneAsync(0);
         }

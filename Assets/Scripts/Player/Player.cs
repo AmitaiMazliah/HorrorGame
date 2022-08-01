@@ -7,7 +7,7 @@ namespace HorrorGame
     {
         [SerializeField] private GameObject playerUi;
         
-        [SyncVar] private string name;
+        [SyncVar] private string playerName;
 
         public override void OnStartLocalPlayer()
         {
