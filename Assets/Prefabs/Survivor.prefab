@@ -509,6 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
+  flashLight: {fileID: 7745331850289922224}
   flashLightLength: 3
   flashLightAngle: 70
 --- !u!114 &1983236076

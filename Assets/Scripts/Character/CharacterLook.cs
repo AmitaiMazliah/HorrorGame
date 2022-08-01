@@ -1,4 +1,5 @@
-﻿using Tempname.Input;
+﻿using System;
+using Tempname.Input;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -8,11 +9,11 @@ namespace HorrorGame
     {
         [SerializeField] protected InputReader inputReader;
 
+        [SerializeField] private Light2D flashLight;
         [SerializeField] protected float flashLightLength = 3f;
         [SerializeField] private float flashLightAngle = 70f;
 
         private Camera cam;
-        private Light2D flashLight;
 
         private void OnEnable()
         {
@@ -27,10 +28,15 @@ namespace HorrorGame
         private void Awake()
         {
             cam = GetComponentInChildren<Camera>();
-            flashLight = GetComponentInChildren<Light2D>();
+            // flashLight = GetComponentInChildren<Light2D>();
+        }
 
+        private void Start()
+        {
+            Debug.Log($"starting flashlight flashLightLength={flashLightLength}  flashLightAngle={flashLightAngle}");
             flashLight.pointLightOuterRadius = flashLightLength;
             flashLight.pointLightOuterAngle = flashLightAngle;
+            Debug.Log($"starting flashlight pointLightOuterRadius={flashLight.pointLightOuterRadius}  pointLightOuterAngle={flashLight.pointLightOuterAngle}");
         }
 
         private void OnLook(Vector2 look)
