@@ -1,7 +1,5 @@
-using System;
 using Mirror;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace HorrorGame
 {
@@ -10,7 +8,7 @@ namespace HorrorGame
         [SerializeField] private float attackRadius = 5f;
         [SerializeField] private Transform attackPosition;
         [SerializeField] private LayerMask survivorsLayer;
-        
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -37,19 +35,15 @@ namespace HorrorGame
         [Command(requiresAuthority = false)]
         private void CmdAttack()
         {
-            var hitSurvivors = new Collider2D[4];
-            Physics2D.OverlapCircleNonAlloc(attackPosition.position, attackRadius, hitSurvivors, survivorsLayer);
+            var hitSurvivors = Physics2D.OverlapCircleAll(attackPosition.position, attackRadius, survivorsLayer);
 
             foreach (var survivor in hitSurvivors)
             {
-                if (survivor != null)
-                {
-                    logger.Info($"I hit someone {survivor.name}");
-                    var health = survivor.GetComponent<CharacterHealth>();
-                    health.Hurt();
-                }
+                logger.Info($"I hit someone {survivor.name}");
+                var health = survivor.GetComponent<CharacterHealth>();
+                health.Hurt();
             }
-        } 
+        }
 
         private void OnDrawGizmosSelected()
         {

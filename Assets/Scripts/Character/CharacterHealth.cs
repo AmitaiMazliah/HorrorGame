@@ -5,8 +5,6 @@ namespace HorrorGame
 {
     public class CharacterHealth : Interactable
     {
-        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        
         [SerializeField] private float maxHealth = 100;
 
         [SyncVar] public float currentHealth;
