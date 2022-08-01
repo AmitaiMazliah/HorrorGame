@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""cad2e471-c330-466a-8bab-cfba107493a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9748f38c-0687-4b89-aea5-458b3933c1c2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -271,6 +291,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         // Killer
         m_Killer = asset.FindActionMap("Killer", throwIfNotFound: true);
         m_Killer_Attack = m_Killer.FindAction("Attack", throwIfNotFound: true);
@@ -339,6 +360,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_UseItem;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -346,6 +368,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,6 +387,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -377,6 +403,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
             }
         }
     }
@@ -461,6 +490,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
     public interface IKillerActions
     {
