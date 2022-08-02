@@ -220,7 +220,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""f53568c9-f4f8-4edb-a4f6-ee92d294f990"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 }
             ],

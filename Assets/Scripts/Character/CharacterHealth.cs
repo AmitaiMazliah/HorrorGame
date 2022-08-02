@@ -7,8 +7,10 @@ namespace HorrorGame
     {
         [SerializeField] private float maxHealth = 100;
 
-        [SyncVar] public float currentHealth;
-        [SyncVar] public CharacterState state = CharacterState.Healthy;
+        [SyncVar]
+        public float currentHealth;
+        [SyncVar]
+        public CharacterState state = CharacterState.Healthy;
 
         private void Start()
         {
@@ -40,8 +42,17 @@ namespace HorrorGame
             Logger.Info($"Character {name} changed {previousState} -> {state}");
         }
 
+        protected override void OnStartInteract()
+        {
+            
+        }
+
+        protected override void OnStopInteract()
+        {
+        }
+
         [Server]
-        protected override void InnerInteract()
+        protected override void OnSuccessfulInteract()
         {
             Heal();
         }

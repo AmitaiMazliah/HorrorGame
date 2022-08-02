@@ -1,3 +1,4 @@
+using HorrorGame;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
@@ -9,9 +10,10 @@ namespace Tempname.Input
     {
         public event UnityAction<Vector2> moveEvent;
         public event UnityAction<Vector2> lookEvent;
-        public event UnityAction interactEvent;
+        public event UnityAction<bool> interactEvent;
         public event UnityAction useItemEvent; 
-        public event UnityAction attackEvent; 
+        public event UnityAction attackEvent;
+        public event UnityAction dashAttackEvent;
         public event UnityAction<bool> toggleSprintEvent; 
 
         private PlayerControls gameInput;
@@ -68,7 +70,15 @@ namespace Tempname.Input
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed) interactEvent?.Invoke();
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    interactEvent?.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    interactEvent?.Invoke(false);
+                    break;
+            }
         }
 
         public void OnUseItem(InputAction.CallbackContext context)
@@ -78,7 +88,11 @@ namespace Tempname.Input
 
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed) attackEvent?.Invoke();
+            if (context.phase == InputActionPhase.Performed)
+            {
+                if (context.duration <= Killer.DashAttackDuration) attackEvent?.Invoke();
+                else dashAttackEvent?.Invoke();
+            }
         }
 
         public void OnSprint(InputAction.CallbackContext context)

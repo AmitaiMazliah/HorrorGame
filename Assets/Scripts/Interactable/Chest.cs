@@ -5,7 +5,11 @@ namespace HorrorGame
 {
     public class Chest : Interactable
     {
-        protected override void InnerInteract()
+        protected override void OnStopInteract()
+        {
+        }
+
+        protected override void OnSuccessfulInteract()
         {
             
         }
@@ -14,6 +18,10 @@ namespace HorrorGame
         {
             var character = interactor.GetComponent<Character>();
             return base.IsAvailable(interactor) && character is Survivor;
+        }
+
+        protected override void OnStartInteract()
+        {
         }
     }
 }

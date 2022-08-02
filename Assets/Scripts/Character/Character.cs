@@ -53,11 +53,12 @@ namespace HorrorGame
             rb.velocity = (movement * movementSpeed);
         }
         
-        private void OnInteract()
+        private void OnInteract(bool interacting)
         {
             if (interactable)
             {
-                interactable.CmdInteract();
+                if (interacting) interactable.CmdStartInteract();
+                else interactable.CmdStopInteract();
             }
         }
         
