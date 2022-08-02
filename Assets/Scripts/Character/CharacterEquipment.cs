@@ -9,6 +9,9 @@ namespace HorrorGame
     {
         [SerializeField] private InputReader inputReader;
 
+        [SyncVar]
+        [SerializeField] private Item item;
+
         private void OnEnable()
         {
             inputReader.useItemEvent += OnUseItem;
@@ -21,7 +24,10 @@ namespace HorrorGame
 
         private void OnUseItem()
         {
-            
+            if (item)
+            {
+                item.Use(netIdentity);
+            }
         }
     }
 }

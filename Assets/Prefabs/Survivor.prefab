@@ -353,8 +353,9 @@ GameObject:
   - component: {fileID: 3155538563477052382}
   - component: {fileID: 6789597396791586646}
   - component: {fileID: 3155538563477052383}
-  - component: {fileID: 6726893155407535070}
+  - component: {fileID: 778780224732290885}
   - component: {fileID: 1983236076}
+  - component: {fileID: 284977672035294733}
   m_Layer: 6
   m_Name: Survivor
   m_TagString: Untagged
@@ -497,7 +498,7 @@ MonoBehaviour:
   movementSpeed: 3
   interactingRadius: 1.25
   runSpeedAddition: 1.5
---- !u!114 &6726893155407535070
+--- !u!114 &778780224732290885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,6 +514,7 @@ MonoBehaviour:
   flashLight: {fileID: 7745331850289922224}
   flashLightLength: 3
   flashLightAngle: 70
+  flashLightColor: {r: 2, g: 1.7960784, b: 0.95686275, a: 1}
 --- !u!114 &1983236076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +533,22 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   state: 0
+--- !u!114 &284977672035294733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155538563477052377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936fcaa72c94420488812b652c394c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
+  item: {fileID: 0}
 --- !u!1 &9041859763776429357
 GameObject:
   m_ObjectHideFlags: 0

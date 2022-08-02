@@ -1,17 +1,18 @@
-﻿using System;
-using Tempname.Input;
+﻿using Tempname.Input;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace HorrorGame
 {
-    public class CharacterLook : MonoBehaviour
+    public class CharacterFlashLight : MonoBehaviour
     {
         [SerializeField] protected InputReader inputReader;
 
         [SerializeField] private Light2D flashLight;
         [SerializeField] protected float flashLightLength = 3f;
         [SerializeField] private float flashLightAngle = 70f;
+        [ColorUsage(true, true)]
+        [SerializeField] private Color flashLightColor = Color.white;
 
         private Camera cam;
 
@@ -34,6 +35,7 @@ namespace HorrorGame
         {
             flashLight.pointLightOuterRadius = flashLightLength;
             flashLight.pointLightOuterAngle = flashLightAngle;
+            flashLight.color = flashLightColor;
         }
 
         private void OnLook(Vector2 look)

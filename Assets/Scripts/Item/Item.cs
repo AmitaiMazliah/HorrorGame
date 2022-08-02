@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HorrorGame
 {
-    public abstract class Item : ScriptableObject
+    public class Item : ScriptableObject
     {
         public virtual void Use(NetworkIdentity player)
         {

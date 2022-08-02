@@ -273,7 +273,8 @@ GameObject:
   - component: {fileID: 8815789241599202313}
   - component: {fileID: 1127094928687390849}
   - component: {fileID: 1675249975266322789}
-  - component: {fileID: 920979177043203081}
+  - component: {fileID: 5781016171964168033}
+  - component: {fileID: 3916482796219992301}
   m_Layer: 7
   m_Name: Killer
   m_TagString: Untagged
@@ -421,7 +422,7 @@ MonoBehaviour:
   survivorsLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &920979177043203081
+--- !u!114 &5781016171964168033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,8 +436,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
   flashLight: {fileID: 4242868353702514535}
-  flashLightLength: 3
-  flashLightAngle: 70
+  flashLightLength: 3.5
+  flashLightAngle: 50
+  flashLightColor: {r: 2.4627452, g: 0.0627451, b: 0.0627451, a: 1}
+--- !u!114 &3916482796219992301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8815789241599202318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936fcaa72c94420488812b652c394c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
+  item: {fileID: 0}
 --- !u!1 &8855681531538828857
 GameObject:
   m_ObjectHideFlags: 0
