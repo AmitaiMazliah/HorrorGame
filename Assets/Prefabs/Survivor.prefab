@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 778780224732290885}
   - component: {fileID: 1983236076}
   - component: {fileID: 284977672035294733}
+  - component: {fileID: 4010658698973076798}
   m_Layer: 6
   m_Name: Survivor
   m_TagString: Untagged
@@ -529,7 +530,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  interactionTime: 0
+  progressSpeedPerInteractor: 0.1
+  progress: 0
+  includeSkillChecks: 0
+  skillCheckChance: 0
+  skillChecks: []
   maxHealth: 100
   currentHealth: 0
   state: 0
@@ -549,6 +554,20 @@ MonoBehaviour:
   syncInterval: 0.1
   inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
   item: {fileID: 0}
+--- !u!114 &4010658698973076798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155538563477052377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa645cb449fd4913bfdcf376a6953ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &9041859763776429357
 GameObject:
   m_ObjectHideFlags: 0

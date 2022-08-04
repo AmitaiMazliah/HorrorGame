@@ -1,4 +1,5 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,18 +11,25 @@ namespace HorrorGame
     {
         protected static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
+        [Header("Progress")]
         [SerializeField] private float progressSpeedPerInteractor = 0.1f;
+        [SyncVar, ProgressBar(0, 100)]
+        public float progress;
         
         [Header("Skill checks")]
         public bool includeSkillChecks;
         [ShowIf(nameof(includeSkillChecks)), Range(0, 100)]
         public int skillCheckChance;
+        [ShowIf(nameof(includeSkillChecks)), AssetList]
+        [SerializeField] private SkillCheck[] skillChecks;
+
+        [SerializeField] private float minTimeBetweenSkillChecks = 1f;
 
         [SyncVar]
         private bool available = true;
-        [SyncVar, ProgressBar(0, 100)]
-        public float progress;
-        private readonly SyncHashSet<NetworkIdentity> interactors = new SyncHashSet<NetworkIdentity>();
+
+        private readonly SyncDictionary<NetworkIdentity, float> interactors =
+            new SyncDictionary<NetworkIdentity, float>();
         
         protected abstract void OnStartInteract();
         protected abstract void OnStopInteract();
@@ -30,25 +38,29 @@ namespace HorrorGame
         [ServerCallback]
         private void Update()
         {
-            if (interactors.Count > 0)
+            if (interactors.Count <= 0) return;
+            
+            Logger.Info($"Interactors count = {interactors.Count}");
+            progress += progressSpeedPerInteractor * interactors.Count * Time.deltaTime;
+
+            if (progress >= 100)
             {
-                Logger.Info($"Interactors count = {interactors.Count}");
-                progress += progressSpeedPerInteractor * interactors.Count * Time.deltaTime;
+                SuccessfulInteract();
+            }
 
-                if (progress >= 100)
+            if (includeSkillChecks)
+            {
+                foreach (var interactor in interactors.Keys.ToList())
                 {
-                    SuccessfulInteract();
-                }
-
-                if (includeSkillChecks)
-                {
-                    foreach (var interactor in interactors)
+                    var lastSkillCheckTime = interactors[interactor];
+                    var drawNumber = Random.Range(0, 100);
+                    if (drawNumber <= skillCheckChance && lastSkillCheckTime + minTimeBetweenSkillChecks <= Time.time)
                     {
-                        var drawNumber = Random.Range(0, 100);
-                        if (drawNumber <= skillCheckChance)
-                        {
-                            Logger.Info($"Start skill check");
-                        }
+                        Logger.Info($"Start skill check");
+                        var skillCheck = skillChecks.GetRandom();
+                        var skillChecker = interactor.GetComponent<CharacterSkillChecker>();
+                        skillChecker.TargetStartSkillCheck(interactor.connectionToClient, skillCheck);
+                        interactors[interactor] = Time.time + skillCheck.fullDuration;
                     }
                 }
             }
@@ -60,7 +72,7 @@ namespace HorrorGame
             if (sender != null)
             {
                 Logger.Info($"Start interacting with {name}");
-                interactors.Add(sender.identity);
+                interactors.Add(sender.identity, Time.time);
                 OnStartInteract();
             }
         }

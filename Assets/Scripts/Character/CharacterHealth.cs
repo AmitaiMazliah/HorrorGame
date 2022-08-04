@@ -1,10 +1,12 @@
 ﻿using Mirror;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace HorrorGame
 {
     public class CharacterHealth : Interactable
     {
+        [Title("Health")]
         [SerializeField] private float maxHealth = 100;
 
         [SyncVar]
