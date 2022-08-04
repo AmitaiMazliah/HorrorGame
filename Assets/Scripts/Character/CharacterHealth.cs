@@ -44,15 +44,6 @@ namespace HorrorGame
             Logger.Info($"Character {name} changed {previousState} -> {state}");
         }
 
-        protected override void OnStartInteract()
-        {
-            
-        }
-
-        protected override void OnStopInteract()
-        {
-        }
-
         [Server]
         protected override void OnSuccessfulInteract()
         {

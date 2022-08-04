@@ -250,6 +250,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillCheck"",
+                    ""type"": ""Button"",
+                    ""id"": ""d78f49a4-c1d9-4ac6-b647-6c4551f2965f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -261,6 +270,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7a5986c-b1f6-4f9d-96ec-2ecf88fb3117"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""SkillCheck"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -298,6 +318,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Survivor
         m_Survivor = asset.FindActionMap("Survivor", throwIfNotFound: true);
         m_Survivor_Sprint = m_Survivor.FindAction("Sprint", throwIfNotFound: true);
+        m_Survivor_SkillCheck = m_Survivor.FindAction("SkillCheck", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -448,11 +469,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Survivor;
     private ISurvivorActions m_SurvivorActionsCallbackInterface;
     private readonly InputAction m_Survivor_Sprint;
+    private readonly InputAction m_Survivor_SkillCheck;
     public struct SurvivorActions
     {
         private @PlayerControls m_Wrapper;
         public SurvivorActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Sprint => m_Wrapper.m_Survivor_Sprint;
+        public InputAction @SkillCheck => m_Wrapper.m_Survivor_SkillCheck;
         public InputActionMap Get() { return m_Wrapper.m_Survivor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -465,6 +488,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSprint;
+                @SkillCheck.started -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSkillCheck;
+                @SkillCheck.performed -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSkillCheck;
+                @SkillCheck.canceled -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSkillCheck;
             }
             m_Wrapper.m_SurvivorActionsCallbackInterface = instance;
             if (instance != null)
@@ -472,6 +498,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @SkillCheck.started += instance.OnSkillCheck;
+                @SkillCheck.performed += instance.OnSkillCheck;
+                @SkillCheck.canceled += instance.OnSkillCheck;
             }
         }
     }
@@ -499,5 +528,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface ISurvivorActions
     {
         void OnSprint(InputAction.CallbackContext context);
+        void OnSkillCheck(InputAction.CallbackContext context);
     }
 }

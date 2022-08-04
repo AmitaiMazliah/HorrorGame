@@ -1,4 +1,5 @@
-﻿using Tempname.Input;
+﻿using Sirenix.OdinInspector;
+using Tempname.Input;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -8,6 +9,7 @@ namespace HorrorGame
     {
         [SerializeField] protected InputReader inputReader;
 
+        [ChildGameObjectsOnly]
         [SerializeField] private Light2D flashLight;
         [SerializeField] protected float flashLightLength = 3f;
         [SerializeField] private float flashLightAngle = 70f;

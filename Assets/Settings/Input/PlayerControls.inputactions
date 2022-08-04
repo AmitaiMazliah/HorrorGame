@@ -228,6 +228,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SkillCheck",
+                    "type": "Button",
+                    "id": "d78f49a4-c1d9-4ac6-b647-6c4551f2965f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -239,6 +248,17 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7a5986c-b1f6-4f9d-96ec-2ecf88fb3117",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "SkillCheck",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

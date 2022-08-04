@@ -18,7 +18,7 @@ namespace HorrorGame
         
         [Header("Skill checks")]
         public bool includeSkillChecks;
-        [ShowIf(nameof(includeSkillChecks)), Range(0, 100)]
+        [ShowIf(nameof(includeSkillChecks)), Range(0, 100), SuffixLabel("%", Overlay = true)]
         public int skillCheckChance;
         [ShowIf(nameof(includeSkillChecks)), AssetList]
         [SerializeField] private SkillCheck[] skillChecks;
@@ -30,10 +30,6 @@ namespace HorrorGame
 
         private readonly SyncDictionary<NetworkIdentity, float> interactors =
             new SyncDictionary<NetworkIdentity, float>();
-        
-        protected abstract void OnStartInteract();
-        protected abstract void OnStopInteract();
-        protected abstract void OnSuccessfulInteract();
 
         [ServerCallback]
         private void Update()
@@ -99,5 +95,9 @@ namespace HorrorGame
             OnSuccessfulInteract();
             interactors.Clear();
         }
+        
+        protected virtual void OnStartInteract() {}
+        protected virtual void OnStopInteract() {}
+        protected virtual void OnSuccessfulInteract() {}
     }
 }

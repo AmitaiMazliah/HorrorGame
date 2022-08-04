@@ -14,7 +14,8 @@ namespace Tempname.Input
         public event UnityAction useItemEvent; 
         public event UnityAction attackEvent;
         public event UnityAction dashAttackEvent;
-        public event UnityAction<bool> toggleSprintEvent; 
+        public event UnityAction<bool> toggleSprintEvent;
+        public event UnityAction skillCheckEvent;
 
         private PlayerControls gameInput;
 
@@ -106,6 +107,11 @@ namespace Tempname.Input
                     toggleSprintEvent?.Invoke(false);
                     break;
             }
+        }
+
+        public void OnSkillCheck(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed) skillCheckEvent?.Invoke();
         }
     }
 }

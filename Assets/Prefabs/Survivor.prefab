@@ -535,6 +535,7 @@ MonoBehaviour:
   includeSkillChecks: 0
   skillCheckChance: 0
   skillChecks: []
+  minTimeBetweenSkillChecks: 1
   maxHealth: 100
   currentHealth: 0
   state: 0
@@ -568,6 +569,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  inputReader: {fileID: 11400000, guid: 3d1e190f915bf904aaed080a96f4c0ca, type: 2}
+  skillEventStarted: {fileID: 0}
 --- !u!1 &9041859763776429357
 GameObject:
   m_ObjectHideFlags: 0
