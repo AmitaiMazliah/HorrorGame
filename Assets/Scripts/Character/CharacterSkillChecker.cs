@@ -1,5 +1,7 @@
 ﻿using Mirror;
 using Sirenix.OdinInspector;
+using Tempname.Audio;
+using Tempname.Events;
 using Tempname.Input;
 using UnityEngine;
 
@@ -11,6 +13,13 @@ namespace HorrorGame
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [SerializeField] private InputReader inputReader;
+        
+        [Title("Audio")]
+        [SerializeField] private AudioCueEventChannelSO sfxEventChannel;
+        [SerializeField] private AudioConfigurationSO audioConfig;
+        [SerializeField] private AudioCueSO startSkillCheckSound;
+        
+        [Title("Events")]
         [SerializeField] private SkillCheckEventChannelSO skillEventStarted;
 
         private void OnEnable()
@@ -27,7 +36,8 @@ namespace HorrorGame
         public void TargetStartSkillCheck(NetworkConnection target, SkillCheck skillCheck)
         {
             Logger.Info("Started skill check");
-            skillEventStarted.RaiseEvent(skillCheck);
+            // sfxEventChannel.RaisePlayEvent(startSkillCheckSound, audioConfig, transform.position);
+            skillEventStarted?.RaiseEvent(skillCheck);
         }
         
         private void OnSkillCheckClick()
