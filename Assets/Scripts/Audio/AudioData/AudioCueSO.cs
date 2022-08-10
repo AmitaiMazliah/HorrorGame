@@ -1,4 +1,7 @@
 using System;
+using HorrorGame;
+using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 namespace Tempname.Audio
@@ -9,20 +12,42 @@ namespace Tempname.Audio
     [CreateAssetMenu(fileName = "newAudioCue", menuName = "Audio/Audio Cue")]
     public class AudioCueSO : ScriptableObject
     {
-        public bool looping = false;
-        [SerializeField] private AudioClipsGroup[] _audioClipGroups = default;
+        public bool looping;
+        [SerializeField] private AudioClipsGroup[] audioClipGroups;
+        
+        private AudioSource previewer;
+
+        private void OnEnable()
+        {
+            previewer = EditorUtility.CreateGameObjectWithHideFlags("Audio preview",
+                HideFlags.HideAndDontSave, typeof(AudioSource)).GetComponent<AudioSource>();
+        }
+        
+        public void OnDisable()
+        {
+            DestroyImmediate(previewer.gameObject);
+        }
 
         public AudioClip[] GetClips()
         {
-            int numberOfClips = _audioClipGroups.Length;
-            AudioClip[] resultingClips = new AudioClip[numberOfClips];
+            var numberOfClips = audioClipGroups.Length;
+            var resultingClips = new AudioClip[numberOfClips];
 
-            for (int i = 0; i < numberOfClips; i++)
+            for (var i = 0; i < numberOfClips; i++)
             {
-                resultingClips[i] = _audioClipGroups[i].GetNextClip();
+                resultingClips[i] = audioClipGroups[i].GetNextClip();
             }
 
             return resultingClips;
+        }
+
+        [Button]
+        private void Play()
+        {
+            var audioGroup = audioClipGroups.GetRandom();
+            var audioClip = audioGroup.audioClips.GetRandom();
+            previewer.clip = audioClip;
+            previewer.Play();
         }
     }
 

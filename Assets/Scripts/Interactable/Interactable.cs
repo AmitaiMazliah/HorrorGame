@@ -20,8 +20,6 @@ namespace HorrorGame
         public bool includeSkillChecks;
         [ShowIf(nameof(includeSkillChecks)), Range(0, 100), SuffixLabel("%", Overlay = true)]
         public int skillCheckChance;
-        [ShowIf(nameof(includeSkillChecks)), AssetList]
-        [SerializeField] private SkillCheck[] skillChecks;
 
         [SerializeField] private float minTimeBetweenSkillChecks = 1f;
 
@@ -53,10 +51,9 @@ namespace HorrorGame
                     if (drawNumber <= skillCheckChance && lastSkillCheckTime + minTimeBetweenSkillChecks <= Time.time)
                     {
                         Logger.Info($"Start skill check");
-                        var skillCheck = skillChecks.GetRandom();
                         var skillChecker = interactor.GetComponent<CharacterSkillChecker>();
-                        skillChecker.TargetStartSkillCheck(interactor.connectionToClient, skillCheck);
-                        interactors[interactor] = Time.time + skillCheck.fullDuration;
+                        skillChecker.TargetStartSkillCheck(interactor.connectionToClient, this);
+                        interactors[interactor] = Time.time;
                     }
                 }
             }
@@ -82,6 +79,18 @@ namespace HorrorGame
                 interactors.Remove(sender.identity);
                 OnStopInteract();
             }
+        }
+
+        [Command(requiresAuthority = false)]
+        public void CmdSuccessSkillCheck(NetworkConnectionToClient sender = null)
+        {
+            
+        }
+        
+        [Command(requiresAuthority = false)]
+        public void CmdFailSkillCheck(NetworkConnectionToClient sender = null)
+        {
+            
         }
 
         public virtual bool IsAvailable(NetworkIdentity interactor)
