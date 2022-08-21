@@ -6,6 +6,7 @@ using Tempname.Audio;
 using Tempname.Events;
 using Tempname.Input;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HorrorGame
 {
@@ -15,6 +16,10 @@ namespace HorrorGame
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [SerializeField] private InputReader inputReader;
+
+        [Title("Settings")]
+        [SerializeField, MinMaxRange(4, 7)]
+        private RangedFloat skillCheckFullDurationRange = new() { minValue = 4, maxValue = 7};
         
         [Title("Audio")]
         [SerializeField] private AudioCueEventChannelSO sfxEventChannel;
@@ -25,7 +30,7 @@ namespace HorrorGame
         [SerializeField] private SkillCheckEventChannelSO skillEventStarted;
 
         private Interactable interactable;
-        [OdinSerialize] public SkillCheck activeSkillCheck;
+        [SerializeField] private SkillCheck activeSkillCheck = null;
         private float skillCheckStartTime;
 
         private void OnEnable()
@@ -45,7 +50,7 @@ namespace HorrorGame
         {
             var skillCheck = new SkillCheck
             {
-                fullDuration = 5,
+                fullDuration = Random.Range(skillCheckFullDurationRange.maxValue, skillCheckFullDurationRange.maxValue),
                 startSafeTime = 4,
                 goodDuration = 0.8f,
                 excellentDuration = 0.1f
